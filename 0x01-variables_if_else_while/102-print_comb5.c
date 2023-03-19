@@ -22,6 +22,7 @@ int main(void)
 				if (i + j != 197)
 				{
 					putchar(',');
+					putchar(' ');
 				}
 			}
 		}
