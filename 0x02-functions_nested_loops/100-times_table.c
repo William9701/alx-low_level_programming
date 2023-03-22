@@ -18,7 +18,7 @@ void print_times_table(int n)
 			if (z > 9)
 			{
 				d = z / 10;
-				u = z % 10;
+				u = (z - u) / 10;
 
 				_putchar(44);
 				_putchar(32);
