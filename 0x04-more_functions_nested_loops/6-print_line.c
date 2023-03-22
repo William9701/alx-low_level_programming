@@ -2,7 +2,8 @@
 #include "main.h"
 
 /**
- * print_line - print dash lines
+ * print_line - print dash line
+ * @n: number to be checkeds
  * Return: void
  */
 void print_line(int n)
