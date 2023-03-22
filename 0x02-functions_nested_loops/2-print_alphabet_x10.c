@@ -4,6 +4,7 @@
  * print_alphabet_x10 - make aphlabets 10xtimes
  * Return: void
  */
+
 void print_alphabet_x10(void)
 {
 	char c;
