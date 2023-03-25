@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "main.h"
+#include "math.h"
 
 /**
  * main - finds and prints the largest facor
@@ -7,28 +7,17 @@
  */
 int main(void)
 {
-	long int n;
-	long int max;
-	long int i;
+	long x, maxf;
+	long number = 612852475143;
+	double square = sqrt(number);
 
-	n = 612852475143;
-	max = -1;
-
-	while (n % 2 == 0)
+	for (x = 1; x <= square; x++)
 	{
-		max = 2;
-		n / = 2;
-	}
-	for (i = 3; i <= sqrt(n); i = i + 2)
-	{
-		while (n % i == 0)
+		if (number % x == 0)
 		{
-			max = i;
-			n = n / 1;
+			maxf = number / x;
 		}
 	}
-	if (n > 2)
-		max = n;
-	printf("%ld\n", max);
+	printf("%lu\n", maxf);
 	return (0);
 }
