@@ -5,7 +5,7 @@
 /**
  * _strlen_recursion - returns the lenght of a string
  * @s: input
- * Return: lenght
+ * Return: lenght of sting
  */
 
 int _strlen_recursion(char *s)
@@ -38,7 +38,7 @@ int compare(char *s, int n1, int n2)
 /**
  * is_palindrome - is_palindrome
  * @s: input
- * REturn: 1 if is palidrome, 0 if not
+ * Return: 1 if is palidrome, 0 if not
  */
 
 int is_palindrome(char *s)
