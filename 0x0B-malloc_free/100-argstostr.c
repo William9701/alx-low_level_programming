@@ -19,7 +19,7 @@ char *argstostr(int ac, char **av)
 		return (NULL);
 	}
 
-	ptr = malloc(sizeof(char * ) * ac + 1);
+	ptr = malloc(sizeof(char * ) * (ac + 1));
 	if (ptr == 0)
 	{
 		return (NULL);
