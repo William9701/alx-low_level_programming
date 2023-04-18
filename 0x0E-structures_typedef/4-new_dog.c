@@ -3,6 +3,13 @@
 #include <string.h>
 #include "dog.h"
 
+/**
+ * new_dog - new dog
+ * @name: name
+ * @age: age
+ * @owner: owner
+ * Return: ptr
+ */
 dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *dog1;
@@ -14,7 +21,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 	dog1 = malloc(sizeof(dog_t));
 	if (dog1 == NULL)
 		return (NULL);
-	
+
 	dog1->name = malloc(sizeof(char) * (i + 1));
 	if (dog1->name == NULL)
 	{
