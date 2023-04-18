@@ -1,12 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dog.h"
+
+/**
+ * print_dog - dog
+ * @d: input
+ */
+
 void print_dog(struct dog *d)
 {
-	if (d == NULL || d->name == NULL || d->owner == NULL)
+	if (d == NULL)
 	{
-		printf("nil");
+		return;
 	}
+	if (d->name == NULL)
+		d->name = "(nil)";
+	if (d->owner == NULL)
+		d->owner = "(nil)";
 
 	printf("Name: %s\n", d->name);
 	printf("Age: %f\n", d->age);
