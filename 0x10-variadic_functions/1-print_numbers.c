@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+/**
+ * print_numbers - print_numbers
+ * @separator: separator
+ * @n: n
+ * Return:
+ */
+
 void print_numbers(const char *separator, const unsigned int n, ...)
 {
 	unsigned int i;
