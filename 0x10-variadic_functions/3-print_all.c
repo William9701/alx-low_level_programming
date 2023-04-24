@@ -5,7 +5,8 @@
 
 /**
  * print_all - all
- * @fomart: input
+ * @format: input
+ * @*:t
  * Return: 0
  */
 
@@ -16,8 +17,6 @@ void print_all(const char * const format, ...)
 	va_list list;
 
 	va_start(list, format);
-
-
 if (format)
 {
 	while (format[i])
@@ -27,15 +26,12 @@ if (format)
 			case 'c':
 				printf("%s%c", p, va_arg(list, int));
 				break;
-
 			case 'i':
 				printf("%s%d", p, va_arg(list, int));
 				break;
-
 			case 'f':
 				printf("%s%f", p, va_arg(list, double));
 				break;
-
 			case 's':
 				s = va_arg(list, char*);
 				if (!s)
@@ -44,7 +40,6 @@ if (format)
 				}
 					printf("%s%s", p, s);
 				break;
-
 			default:
 				i++;
 				continue;
