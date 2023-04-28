@@ -7,4 +7,4 @@ main:
 	call printf	; call printf
 	mov	 eax, 0	; clear eax
 	ret		;return
-msg:db `Hello,Holberton\n`,0
+msg:db `Hello, Holberton\n`,0
