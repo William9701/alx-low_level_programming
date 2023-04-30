@@ -18,16 +18,17 @@ listint_t *add_nodeint(listint_t **head, const int n)
 	{
 		return (NULL);
 	}
+	p->n = n;
+	p->next = NULL;
 	if (*head == NULL)
 	{
 		*head = p;
 	}
 	else
 	{
-	p->n = n;
-	p->next = *head;
-	*head = p;
+	p->next = (*head)->next;
+	(*head)->next = p;
 	}
 
-	return (*head);
+	return (p);
 }
