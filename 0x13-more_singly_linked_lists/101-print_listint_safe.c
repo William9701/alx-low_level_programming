@@ -29,21 +29,17 @@ size_t looped_listint_len(const listint_t *head)
 				t = t->next;
 				h = h->next;
 			}
-
 			t = t->next;
 			while (t != h)
 			{
 				count++;
 				t = t->next;
 			}
-
 			return (count);
 		}
-
 		t = t->next;
 		h = (h->next)->next;
 	}
-
 	return (0);
 }
 
@@ -54,29 +50,27 @@ size_t looped_listint_len(const listint_t *head)
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t count, index = 0;
+	size_t count, idx = 0;
 
 	count = looped_listint_len(head);
-
 	if (count == 0)
 	{
-		for (; head != NULL; count++)
+		while (head != NULL)
 		{
 			printf("[%p] %d\n", (void *)head, head->n);
+			count++;
 			head = head->next;
 		}
 	}
-
 	else
 	{
-		for (index = 0; index < count; index++)
+		while (idx < count)
 		{
 			printf("[%p] %d\n", (void *)head, head->n);
 			head = head->next;
+			idx++;
 		}
-
 		printf("-> [%p] %d\n", (void *)head, head->n);
 	}
-
 	return (count);
 }
