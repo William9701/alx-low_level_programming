@@ -7,7 +7,7 @@
  * @head: A ptr to the head of the listint_t to check.
  * Return: 0
  */
-size_t looped_listint_len(const listint_t *head)
+size_t looped_listint(const listint_t *head)
 {
 	const listint_t *t, *h;
 	size_t count = 1;
@@ -52,7 +52,7 @@ size_t print_listint_safe(const listint_t *head)
 {
 	size_t count, idx = 0;
 
-	count = looped_listint_len(head);
+	count = looped_listint(head);
 	if (count == 0)
 	{
 		while (head != NULL)
