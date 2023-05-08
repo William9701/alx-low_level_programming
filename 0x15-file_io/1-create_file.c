@@ -16,13 +16,13 @@
 int create_file(const char *filename, char *text_content)
 {
 	int fp;
-	size_t len;
+	ssize_t nwrite, len;
 
 	if (filename == NULL)
 	{
 		return (-1);
 	}
-	fp = open(filename,  O_WRONLY | O_CREAT | S_IWUSR | O_TRUNC, S_IRUSR);
+	fp = open(filename,  O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (fp == -1)
 	{
 		return (-1);
@@ -35,11 +35,12 @@ int create_file(const char *filename, char *text_content)
 	if (text_content != NULL)
 	{
 		len = strlen(text_content);
-		if (write(fp, text_content, len) != (ssize_t) len)
-		{
-			close(fp);
-			return (-1);
-		}
+	}
+	nwrite = write(fp, text_content, len);
+	if (nwrite == -1)
+	{
+		close(fp);
+		return (-1);
 	}
 	close(fp);
 
