@@ -8,6 +8,12 @@
 #include <unistd.h>
 #include <string.h>
 
+/**
+ * append_text_to_file - append_text_to_file
+ * @filename: filename
+ * @text_content: text_content
+ * Return: 1
+ */
 int append_text_to_file(const char *filename, char *text_content)
 {
 	int fp;
