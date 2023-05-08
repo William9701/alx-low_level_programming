@@ -16,7 +16,7 @@
 int create_file(const char *filename, char *text_content)
 {
 	int fp;
-	ssize_t nwritten;
+	size_t len;
 
 	if (filename == NULL)
 	{
@@ -31,10 +31,15 @@ int create_file(const char *filename, char *text_content)
 	{
 		return (-1);
 	}
+	if (fchmod(fp, S_IRUSR | S_IWUSR) == -1) 
+	{
+		close(fp);
+		return (-1);
+	}
 	if (text_content != NULL)
 	{
-		nwritten = write(fp, text_content, strlen(text_content));
-		if (nwritten == -1)
+		len = strlen(text_content);
+		if (write(fp, text_content, len) != (ssize_t) len)
 		{
 			close(fp);
 			return (-1);
