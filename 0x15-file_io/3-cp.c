@@ -1,74 +1,91 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
 #include <stdio.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
+#include <stdlib.h>
+#include <stddef.h>
+
 
 /**
- * main - main
- * @argc: argc count
- * @argv: argument line
- * Return: 1
+ * main - Copies the contents of a file to another file.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
+ *
+ * Return: 0 on success.
  */
 int main(int argc, char *argv[])
 {
-	char buffer[1024];
-	FILE *from, *to;
-	size_t c;
+	int from, to, nread, nwrite;
+	char *buffer;
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: cp file_from file_to");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	from = fopen(argv[1], "r");
-	if (from == NULL)
-	{
-		fprintf(stderr, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	to = fopen(argv[2], "w+");
-	if (to == NULL)
-	{
-		fprintf(stderr, "Error: Can't read from file %s\n", argv[2]);
-		exit(99);
-	}
-	if (chmod(argv[2], S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH) == -1)
-	{
-		perror("chmod() failed");
-		return (-1);
-	}
-	while ((c = fread(buffer, sizeof(char), sizeof(buffer), from)) > 0)
-	{
-		if (fwrite(buffer, sizeof(char), c, to) != c)
+	buffer = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	nread = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	do {
+		if (from == -1 || nread == -1)
 		{
-			fprintf(stderr, "Error: Can't read from file");
-			fclose(from);
-			fclose(to);
-			return (-1);
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
 		}
-	}
-	close_file(to);
+		nwrite = write(to, buffer, nread);
+		if (to == -1 || nwrite == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
+			exit(99);
+		}
+		nread = read(from, buffer, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
+	} while (nread > 0);
+	free(buffer);
 	close_file(from);
+	close_file(to);
 	return (0);
 }
-
 /**
- * close_file - close_file
- * @from: file
+ * create_buffer - Allocates 1024 bytes for a buffer.
+ * @file: The name of the file buffer is storing chars for.
+ *
+ * Return: A pointer to the newly-allocated buffer.
  */
-void close_file(FILE *from)
+char *create_buffer(char *file)
 {
-	int f;
+	char *buffer;
 
-	f = fileno(from);
-	if (fclose(from) == EOF)
+	buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
 	{
-		fprintf(stderr, "Error: Can't close fd %d", f);
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", file);
+		exit(99);
+	}
+
+	return (buffer);
+}
+/**
+ * close_file - Closes file descriptors.
+ * @fd: The file descriptor to be closed.
+ */
+void close_file(int fd)
+{
+	int c;
+
+	c = close(fd);
+
+	if (c == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
+
