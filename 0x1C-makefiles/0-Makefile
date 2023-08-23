@@ -1,0 +1,10 @@
+# makefile for buildng the school executable
+# Rukes to use : all
+#
+all: school
+
+school:
+	gcc -o school main.c school.c
+
+clean:
+	rm -f school
