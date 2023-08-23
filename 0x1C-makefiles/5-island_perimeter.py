@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """defines an island perimiter"""
 
+
 def island_perimeter(grid):
     """returns the pm of the island"""
     width = len(grid[0])
     height = len(grid)
     edges = 0
     size = 0
-    
+
     for i in range(height):
         for j in range(width):
             if grid[i][j] == 1:
