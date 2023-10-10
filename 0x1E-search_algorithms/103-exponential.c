@@ -23,7 +23,7 @@ int exponential_search(int *array, size_t size, int value)
 
 	printf("Value found between indexes [%d] and [%d]\n", i / 2, i);
 
-	return b_search(array, i / 2, i < right ? i : right, value);
+	return (b_search(array, i / 2, i < right ? i : right, value));
 }
 
 /**
