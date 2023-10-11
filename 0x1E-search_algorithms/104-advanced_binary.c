@@ -60,7 +60,7 @@ int binary_search_recursive(int *array, size_t left, size_t right, int value)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	if (!array)
+	if (array == NULL || size == 0)
 		return (-1);
 
 	return (binary_search_recursive(array, 0, size - 1, value));
